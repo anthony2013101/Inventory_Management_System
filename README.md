@@ -1,25 +1,22 @@
-# Student Grade Management System Project
+# Enhanced Inventory Management System within Curriculum Scope Project
 
-This project is a Student Grade Management System that includes interfaces for student login to view scorecards and grades and a teacher interface to assign scores and grades for enrolled students.
+This project is an enhanced Inventory Management System developed within the curriculum scope constraints, focusing on variable data types, conditionals, loops, classes, objects, database operations, and interactive challenges.
 
 ### Features:
 
-#### Student Interface:
-- Students can log in using their assigned username and password to view their scorecards and grades in enrolled courses.
-
-#### Teacher Interface:
-- Teachers can assign scores and grades to all students enrolled in their courses.
+#### Functionality:
+- Manage product inventory with variables, lists, and dictionaries, including CRUD operations and interactive challenges for sorting and searching functionalities.
+- Develop user authentication using basic conditionals and exception handling, and implement data analysis and reporting features based on stored data.
 
 #### Database Management:
-- All student and grade data are stored in a local MySQL database for efficient data management.
+- Set up MySQL using basic operations (DDL, DML, DQL) for storing product information and managing product categories within the inventory system.
 
-### Additional Features:
-- User-friendly interfaces for students and teachers to interact with the system.
-- Course enrollment management for students and score assignment for teachers.
+### Optional Challenges:
+- Implement cost analysis functions, performance optimization, custom reporting features, and interactive inventory challenges within the curriculum scope.
 
 ### How to Run:
 1. Clone this repository.
 2. Set up a local MySQL server and configure the database connection in the code.
-3. Run `python main.py` to start the Student Grade Management System.
+3. Run `python main.py` to start the Enhanced Inventory Management System.
 
-Customize and expand the features to meet your project goals and enjoy exploring student grade management functionalities!
+Customize and enhance the features within the curriculum boundaries for an enriching hands-on learning experience in database management and inventory control!

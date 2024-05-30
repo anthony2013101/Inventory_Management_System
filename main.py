@@ -1,8 +1,9 @@
-from src.grade_management import GradeManagement
+from src.inventory_management import InventoryManagement
 
 def main():
-    grade_management = GradeManagement()
-    # Implement your grade management system operations here
+    inventory_management = InventoryManagement()
+    # Implement your inventory management system operations here
 
 if __name__ == "__main__":
     main()
+    
