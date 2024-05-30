@@ -1,8 +1,8 @@
-from src.library import Library
+from src.grade_management import GradeManagement
 
 def main():
-    library = Library()
-    # Implement your library management system operations here
+    grade_management = GradeManagement()
+    # Implement your grade management system operations here
 
 if __name__ == "__main__":
     main()
