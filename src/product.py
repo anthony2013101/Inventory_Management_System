@@ -9,4 +9,3 @@ class Product:
     # Implement additional product-related methods here
 
     print("hello world")
-    print('Im Anthony')
