@@ -1,0 +1,6 @@
+virtual
+**/*.pyc
+.idea/workspace.xml
+*.pyc
+*.pyc
+*.xml
