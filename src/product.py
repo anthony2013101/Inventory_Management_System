@@ -19,4 +19,6 @@ class Product:
         cursor.execute(query)
         result = cursor.fetchall()
         return result
-print(Product.get_all_products())
+
+productlist = [{'product_id':item[0], 'product_name': item[1], 'quantity': item[2], 'price': item[3]} for item in Product.get_all_products()]
+print(productlist)
