@@ -7,8 +7,3 @@ class Product:
         self.category = None
 
     # Implement additional product-related methods here
-
-    print("hello world")
-
-Anthony was here
-Zoe was also here
