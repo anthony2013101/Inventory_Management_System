@@ -1,19 +1,22 @@
+from database import get_connections
 class Product:
-    def __init__(self, product_id, name, price, quantity):
+    def __init__(self, product_id, product_name, price, quantity):
         self.product_id = product_id
-        self.name = name
+        self.product_name = product_name
         self.price = price
         self.quantity = quantity
         self.category = None
 
     # Implement additional product-related methods here
-    def all_products():
+
+    def __str__(self):
+        return f"{self.product_name} - Price: ${self.price} - Quantity: {self.quantity}"
+
+    def get_all_products():
         connection = get_connections()
         cursor = connection.cursor()
-        cursor.execute("""SELECT product_id, product_name, price, quantity FROM inventory;""")
+        query = """ SELECT product_id, product_name, price, quantity FROM inventory;"""
+        cursor.execute(query)
         result = cursor.fetchall()
-        cursor.close()
-        connection.close()
         return result
-
-    print(all_products())
+print(Product.get_all_products())
