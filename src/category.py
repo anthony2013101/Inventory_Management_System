@@ -19,5 +19,20 @@ class Category:
         result = cursor.fetchall()
         return result
 
+    def category_low_stock():
+        connection = get_connections()
+        cursor = connection.cursor()
+        query = """SELECT category_id, category_name, SUM(quantity) as total_quantity 
+           FROM inventory
+           GROUP BY category_id, category_name
+           HAVING SUM(quantity) <= 150;"""
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+
+print(Category.category_low_stock())
+
+
 categorylist = [{'category_id':item[0], 'category_name': item[1], 'quantity': item[2]} for item in Category.get_all_categories()]
 print(categorylist)
+
