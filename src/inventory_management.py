@@ -1,24 +1,46 @@
-from product import Product
+from database import get_connections
 from product import productlist
 from category import categorylist
 
 class InventoryManagement:
+
     def __init__(self):
+        self.connection = get_connections()
         self.categories = categorylist
         self.products = productlist
 
-    def add_item(self, product_id, product_name, price, quantity):
+    def add_item(self, product_id, product_name, quantity, price, category_id, category_name):
         if product_id in self.products:
-            self.products[product_id].quantity += quantity
+            self.products[product_id]['quantity'] += quantity
+            connection = get_connections()
+            cursor = connection.cursor()
+            query = """UPDATE inventory SET quantity = quantity + %s WHERE product_id = %s;"""
+            cursor.execute(query, (quantity, product_id))
+            connection.commit()
+            result = cursor.fetchall()
+            return result
         else:
-            self.products[product_id] = Product(product_id, product_name, price, quantity)
+            self.products[product_id] = {
+                'product_name': product_name,
+                'quantity': quantity,
+                'price': price,
+                'category_id': category_id,
+                'category_name': category_name
+            }
+            connection = get_connections()
+            cursor = connection.cursor()
+            query = """INSERT INTO inventory (product_id, product_name, quantity, price, category_id, category_name) VALUES (%s, %s, %s, %s, %s, %s);"""
+            cursor.execute(query, (product_id, product_name, quantity, price, category_id, category_name))
+            connection.commit()
+            result = cursor.fetchall()
+            return result
         print(f"Added {quantity} of {product_name} at ${price} each to the inventory.")
 
     def remove_item(self, product_id, product_name, quantity):
         if product_id in self.products:
             if self.products[product_id].quantity >= quantity:
                 self.products[product_id].quantity -= quantity
-                if self.products[product_id].quantity== 0:
+                if self.products[product_id].quantity == 0:
                     del self.products[product_id]
                 print(f"Removed {quantity} of {product_name} from the inventory.")
             else:
@@ -46,8 +68,7 @@ class InventoryManagement:
 inventory = InventoryManagement()
 
 # Adjust items to the inventory
-inventory.add_item(30, "shoes", 59, 11)
-#inventory.add_item(2, "shirts", 29, 50)
+inventory.add_item(30, "Kawhi Jersey", 5, 79.99, category_id=1, category_name="Jerseys")
 #inventory.remove_item(1, "shoes", 5)
 #inventory.update_price(1,"shoes",69)
 #inventory.display_inventory()
