@@ -6,4 +6,6 @@ class Product:
         self.quantity = quantity
         self.category = None
 
-    # Implement additional product-related methods here
+    def __str__(self):
+        return f"{self.name} - Price: ${self.price} - Quantity: {self.quantity}"
+
