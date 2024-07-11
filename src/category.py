@@ -4,8 +4,6 @@ class Category:
         self.name = name
         self.products = []
 
-    # Implement additional category-related methods here
-
     def add_product(self, product):
         self.products.append(product)
 
@@ -14,5 +12,3 @@ class Category:
 
     def list_products(self):
         return self.products
-
-
