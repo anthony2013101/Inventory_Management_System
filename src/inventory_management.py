@@ -58,6 +58,29 @@ class InventoryManagement:
             category.remove_product(product)
         self.delete_product(product)
         return f'{product.name} has been removed from Inventory.'
+    
+    def remove_item(self, product_id, name, quantity):
+        if product_id in self.products:
+            if self.products[product_id]['quantity'] >= quantity:
+                self.products[product_id]['quantity']-= quantity
+                connection = get_connections()
+                cursor = connection.cursor()
+                update_query = """UPDATE products SET quantity = quantity - %s WHERE product_id = %s;"""
+                cursor.execute(update_query, (quantity, product_id))
+                connection.commit()
+
+                if self.products[product_id]['quantity'] == 0:
+                    del self.products[product_id]
+                    delete_query = """DELETE FROM products WHERE product_id = %s;"""
+                    cursor.execute(delete_query, (product_id,))
+                    connection.commit()
+                    result = cursor.fetchall()
+                    return result
+                print(f"Removed {quantity} of {name} from the inventory.")
+            else:
+                print(f"Error: Not enough quantity of {name} to remove.")
+        else:
+            print(f"Error: {name} not found in inventory.")
 
     def delete_product(self, product):
         cursor = self.connection.cursor()
