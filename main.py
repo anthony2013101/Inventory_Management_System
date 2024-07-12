@@ -1,7 +1,27 @@
-from src.inventory_management import InventoryManagement
+def login(users):
+    username = input("Enter username: ")
+    password = input("Enter password: ")
 
+    if username in users and users[username] == password:
+        print("Login successful!")
+    else:
+        print("Invalid username or password.")
+
+# Sample users data
+users = {
+    "zoe": "password1",
+    "anthony": "password2",
+    "avi": "password3",
+    "sifat": "password4"
+}
+
+login(users)
+
+from src.inventory_management import InventoryManagement
 def main():
     inventory = InventoryManagement()
+    while login(users) == "Login successful!" == True:
+        return True
     # Implement your inventory management system operations here
 
 while True:
@@ -15,10 +35,13 @@ while True:
     choice = input("Enter your choice: ")
 
     if choice == '1':
-        item_name = input("Enter item name: ")
+        product_id = input("Enter product ID: ")
+        product_name = input("Enter product name: ")
         quantity = int(input("Enter quantity: "))
         price = float(input("Enter price: "))
-        inventory.add_item(item_name, quantity, price)
+        category_id = input("Enter category ID: ")
+        category_name = input("Enter category name: ")
+        InventoryManagement.add_item(product_id, product_name, quantity, price, category_id, category_name)
 
     elif choice == '2':
         item_name = input("Enter item name: ")
