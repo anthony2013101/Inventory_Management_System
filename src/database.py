@@ -1,5 +1,5 @@
 import mysql.connector
-print("MySQL Connector installed successfully.")
+#print("MySQL Connector installed successfully.")
 
 # mydb = mysql.connector.connect(
 #     host='localhost',
@@ -29,4 +29,4 @@ def print_database():
     connection.close()
     return result
 
-print(print_database())
+#print(print_database())
