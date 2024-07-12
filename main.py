@@ -19,7 +19,6 @@ login(users)
 
 from src.inventory_management import InventoryManagement
 def main():
-    inventory = InventoryManagement()
     while login(users) == "Login successful!" == True:
         return True
     # Implement your inventory management system operations here
@@ -44,17 +43,19 @@ while True:
         InventoryManagement.add_item(product_id, product_name, quantity, price, category_id, category_name)
 
     elif choice == '2':
-        item_name = input("Enter item name: ")
+        product_id = int(input("Enter product ID: "))
+        product_name = input("Enter item name: ")
         quantity = int(input("Enter quantity to remove: "))
-        inventory.remove_item(item_name, quantity)
+        InventoryManagement.remove_item(product_id, product_name, quantity)
 
     elif choice == '3':
-        item_name = input("Enter item name: ")
+        product_id = int(input("Enter product ID: "))
+        product_name = input("Enter item name: ")
         new_price = float(input("Enter new price: "))
-        inventory.update_price(item_name, new_price)
+        InventoryManagement.update_price(product_id, product_name, new_price)
 
     elif choice == '4':
-        inventory.display_inventory()
+        InventoryManagement.display_inventory()
 
     elif choice == '5':
         print("Exiting the Inventory Management System.")

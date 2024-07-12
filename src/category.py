@@ -34,5 +34,5 @@ class Category:
 
 
 categorylist = [{'category_id':item[0], 'category_name': item[1], 'quantity': item[2]} for item in Category.get_all_categories()]
-#print(categorylist)
+print(categorylist)
 

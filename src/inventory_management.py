@@ -61,7 +61,14 @@ class InventoryManagement:
 
     def update_price(self, product_id, product_name, new_price):
         if product_id in self.products:
-            self.products[product_id].price = new_price
+            self.products[product_id]['price'] = new_price
+            connection = get_connections()
+            cursor = connection.cursor()
+            query = """UPDATE inventory SET price = %s WHERE product_id = %s;"""
+            cursor.execute(query, (new_price, product_id))
+            connection.commit()
+            result = cursor.fetchall()
+            return result
             print(f"Updated price of {product_name} to ${new_price}.")
         else:
             print(f"Error: {product_name} not found in inventory.")
@@ -72,7 +79,10 @@ class InventoryManagement:
         else:
             print("Current Inventory:")
             for product_id, product in self.products.items():
-                print(f"Item: {product.product_name}, Quantity: {product.quantity}, Price: ${product.price}")
+                print(f"Product ID: {product_id}, "
+                      f"Product Name: {product['product_name']}, "
+                      f"Quantity: {product['quantity']}, "
+                      f"Price: ${product['price']:.2f}")
 
 
 # Create an instance of Inventory
@@ -80,9 +90,9 @@ inventory = InventoryManagement()
 
 # Adjust items to the inventory
 #inventory.add_item(30, "Kawhi Jersey", 5, 79.99, category_id=1, category_name="Jerseys")
-inventory.remove_item(30, 'Kawhi Jersey', 3)
-#inventory.update_price(1,"shoes",69)
-#inventory.display_inventory()
+#inventory.remove_item(30, 'Kawhi Jersey', 3)
+#inventory.update_price(5,"NBA Official Cap",14.99)
+inventory.display_inventory()
 
 # Print the inventory
 print(productlist)
