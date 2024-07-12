@@ -27,8 +27,7 @@ class InventoryManagement:
         for category in self.categories:
             if category.category_id == category_id:
                 return category
-        return f"Category was not found in the inventory"
-
+        return None
     def create_product(self, product_id, name, price, quantity, category_id):
         category = self.find_category(category_id)
         if not category:
@@ -41,7 +40,7 @@ class InventoryManagement:
         category.add_product(product)
         self.products.append(product)
         self.save_product(product)
-        return product
+        return print(f"Added {quantity} {name}s at ${price} each the inventory")
 
     def save_product(self, product):
         cursor = self.connection.cursor()
@@ -49,11 +48,14 @@ class InventoryManagement:
         cursor.execute(query, (product.product_id, product.name, product.price, product.quantity, product.category_id))
         self.connection.commit()
 
-    def remove_product(self, product):
-        if product not in self.products:
-            raise ValueError("There is no {product.name} found in the Inventory.")
+    def remove_product(self, product_id):
+        product = next((p for p in self.products if p.product_id == product_id), None)
+        if product is None:
+            raise ValueError(f"There is no product with ID {product_id} found in the Inventory.")
         self.products.remove(product)
-        product.category.remove_product(product)
+        category = self.find_category(product.category_id)  # Retrieve the category object
+        if category is not None:
+            category.remove_product(product)
         self.delete_product(product)
         return f'{product.name} has been removed from Inventory.'
 
@@ -62,6 +64,7 @@ class InventoryManagement:
         query = "DELETE FROM products WHERE product_id = %s"
         cursor.execute(query, (product.product_id,))
         self.connection.commit()
+
 
     def list_categories(self):
         return self.categories
@@ -98,3 +101,21 @@ class InventoryManagement:
         query = "UPDATE categories SET name = %s WHERE category_id = %s"
         cursor.execute(query, (category.name, category.category_id))
         self.connection.commit()
+
+    def display_inventory(self):
+        """
+        Displays the current inventory of products.
+        """
+        print("Current Inventory:")
+        print("------------------")
+
+        if not self.products:
+            print("No products in the inventory.")
+            return
+
+        for product in self.products:
+            print(
+                f"{product.name} - Price: ${product.price} - Quantity: {product.quantity} - Category: {product.category_id}")
+
+        print("------------------")
+        print(f"Total Products: {len(self.products)}")

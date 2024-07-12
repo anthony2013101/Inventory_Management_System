@@ -23,11 +23,13 @@ def main():
             quantity = int(input("Enter quantity: "))
             price = float(input("Enter price: "))
             category_id = int(input('Enter Category ID: '))
-            inventory.create_product(product_id, name, quantity, price, category_id)
+            result = inventory.create_product(product_id, name, price, quantity, category_id)
+            print(result)
 
         elif choice == '2':
-            name = str(input("Enter item name: "))
-            inventory.remove_product(name)
+            product_id = int(input("Enter Product ID: "))
+            result = inventory.remove_product(product_id)
+            print(result)
 
         elif choice == '3':
             category_id = int(input("Enter Category ID: "))
@@ -41,16 +43,18 @@ def main():
             new_name = input("Enter new item name: ")
             new_quantity = int(input("Enter new quantity: "))
             new_price = float(input("Enter new price: "))
-            inventory.update_product(product_id, new_name, new_price, new_quantity)
+            result = inventory.update_product(product_id, new_name, new_price, new_quantity)
+            print(result)
 
         elif choice == '5':
             category_id = int(input("Enter Category ID: "))
             new_name = str(input("Enter name: "))
-            inventory.update_category(category_id, new_name)
+            result = inventory.update_category(category_id, new_name)
+            print(result)
 
         elif choice == '6':
-            print("Exiting the Inventory Management System.")
-            break
+            result = inventory.display_inventory()
+            print(result)
 
         elif choice == '7':
             print("Exiting the Inventory Management System.")
