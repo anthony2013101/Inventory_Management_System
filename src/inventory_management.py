@@ -15,11 +15,11 @@ class InventoryManagement:
         category = Category(category_id, name)
         self.categories.append(category)
         self.save_category(category)
-        return category
+        return f"Category with ID {category_id} and name {name} has been created."
 
     def save_category(self, category):
         cursor = self.connection.cursor()
-        query = "INSERT INTO category (category_id, name) VALUES (%s, %s)"
+        query = "INSERT INTO categories (category_id, name) VALUES (%s, %s)"
         cursor.execute(query, (category.category_id, category.name))
         self.connection.commit()
 
@@ -95,6 +95,6 @@ class InventoryManagement:
 
     def save_category_update(self, category):
         cursor = self.connection.cursor()
-        query = "UPDATE category SET name = %s WHERE category_id = %s"
+        query = "UPDATE categories SET name = %s WHERE category_id = %s"
         cursor.execute(query, (category.name, category.category_id))
         self.connection.commit()
