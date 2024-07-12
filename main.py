@@ -9,7 +9,7 @@ def main():
     while True:
         print("Inventory Management System")
         print("1. Add Product")
-        print("2. Remove Item")
+        print("2. Remove Product")
         print("3. Create New Category")
         print("4. Update Product Info")
         print("5. Update Category Name")
@@ -27,10 +27,8 @@ def main():
             print(result)
 
         elif choice == '2':
-            product_id = int(input("Enter Product ID: "))
-            name = input("Enter Product Name: ")
-            quantity = int(input("Enter Quantity: "))
-            result = inventory.remove_item(product_id, name, quantity)
+            product_id = int(input('Enter Product ID: '))
+            result = inventory.remove_product(product_id)
             print(result)
 
         elif choice == '3':
