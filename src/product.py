@@ -1,4 +1,4 @@
-from database import get_connections
+from src.database import get_connections
 class Product:
     def __init__(self, product_id, product_name, price, quantity):
         self.product_id = product_id
@@ -30,8 +30,8 @@ class Product:
         result = cursor.fetchall()
         return result
 
-print(Product.need_to_order())
+#print(Product.need_to_order())
 
 productlist = {item[0]: {'product_name': item[1], 'price': item[2], 'quantity': item[3]} for item in Product.get_all_products()}
-print(productlist)
+#print(productlist)
 
