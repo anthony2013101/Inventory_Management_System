@@ -1,6 +1,6 @@
-from database import get_connections
-from product import productlist
-from category import categorylist
+from src.database import get_connections
+from src.product import productlist
+from src.category import categorylist
 
 class InventoryManagement:
 
@@ -34,7 +34,7 @@ class InventoryManagement:
             connection.commit()
             result = cursor.fetchall()
             return result
-        print(f"Added {quantity} of {product_name} at ${price} each to the inventory.")
+        print(f"Added {quantity} {product_name}s at ${price} each to the inventory.")
 
     def remove_item(self, product_id, product_name, quantity):
         if product_id in self.products:
@@ -42,14 +42,14 @@ class InventoryManagement:
                 self.products[product_id]['quantity']-= quantity
                 connection = get_connections()
                 cursor = connection.cursor()
-                query = """UPDATE inventory SET quantity = quantity - %s WHERE product_id = %s;"""
-                cursor.execute(query, (quantity, product_id))
+                update_query = """UPDATE inventory SET quantity = quantity - %s WHERE product_id = %s;"""
+                cursor.execute(update_query, (quantity, product_id))
                 connection.commit()
 
                 if self.products[product_id]['quantity'] == 0:
                     del self.products[product_id]
-                    query = """DELETE FROM inventory WHERE product_id = %s;"""
-                    cursor.execute(query, (product_id))
+                    delete_query = """DELETE FROM inventory WHERE product_id = %s;"""
+                    cursor.execute(delete_query, (product_id,))
                     connection.commit()
                     result = cursor.fetchall()
                     return result
@@ -79,8 +79,8 @@ class InventoryManagement:
 inventory = InventoryManagement()
 
 # Adjust items to the inventory
-inventory.add_item(30, "Kawhi Jersey", 0, 79.99, category_id=1, category_name="Jerseys")
-inventory.remove_item(30, "Kawhi Jersey", 1)
+#inventory.add_item(30, "Kawhi Jersey", 5, 79.99, category_id=1, category_name="Jerseys")
+inventory.remove_item(30, 'Kawhi Jersey', 3)
 #inventory.update_price(1,"shoes",69)
 #inventory.display_inventory()
 
