@@ -38,10 +38,21 @@ class InventoryManagement:
 
     def remove_item(self, product_id, product_name, quantity):
         if product_id in self.products:
-            if self.products[product_id].quantity >= quantity:
-                self.products[product_id].quantity -= quantity
-                if self.products[product_id].quantity == 0:
+            if self.products[product_id]['quantity'] >= quantity:
+                self.products[product_id]['quantity']-= quantity
+                connection = get_connections()
+                cursor = connection.cursor()
+                query = """UPDATE inventory SET quantity = quantity - %s WHERE product_id = %s;"""
+                cursor.execute(query, (quantity, product_id))
+                connection.commit()
+
+                if self.products[product_id]['quantity'] == 0:
                     del self.products[product_id]
+                    query = """DELETE FROM inventory WHERE product_id = %s;"""
+                    cursor.execute(query, (product_id))
+                    connection.commit()
+                    result = cursor.fetchall()
+                    return result
                 print(f"Removed {quantity} of {product_name} from the inventory.")
             else:
                 print(f"Error: Not enough quantity of {product_name} to remove.")
@@ -68,8 +79,8 @@ class InventoryManagement:
 inventory = InventoryManagement()
 
 # Adjust items to the inventory
-inventory.add_item(30, "Kawhi Jersey", 5, 79.99, category_id=1, category_name="Jerseys")
-#inventory.remove_item(1, "shoes", 5)
+inventory.add_item(30, "Kawhi Jersey", 0, 79.99, category_id=1, category_name="Jerseys")
+inventory.remove_item(30, "Kawhi Jersey", 1)
 #inventory.update_price(1,"shoes",69)
 #inventory.display_inventory()
 
