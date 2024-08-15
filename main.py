@@ -3,29 +3,8 @@ from src.database import get_connections
 from src.product import get_all_products
 from time import sleep
 
-def login(users):
-    username = input("Enter username: ")
-    password = input("Enter password: ")
-
-    if username in users and users[username] == password:
-        print("Login successful!")
-    else:
-        print("Invalid username or password.")
-
-# Sample users data
-users = {
-    "zoe": "password1",
-    "anthony": "password2",
-    "avi": "password3",
-    "sifat": "password4"
-}
-
-login(users)
-
 def main():
     inventory = InventoryManagement()
-    while login(users) == "Login successful!" == True:
-        return True
 
     while True:
         print("Inventory Management System")
