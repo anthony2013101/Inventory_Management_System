@@ -2,7 +2,6 @@ from src.inventory_management import InventoryManagement
 from src.database import get_connections
 from src.product import get_all_products
 from time import sleep
-
 def main():
     inventory = InventoryManagement()
 
