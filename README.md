@@ -23,5 +23,10 @@ Main features include adding, removing, and updating products as well as display
 
 
 Example of Displaying the Inventory
+
+
+
+
+
 <img width="547" alt="Screenshot 2024-08-15 at 1 49 40 PM" src="https://github.com/user-attachments/assets/656b6e37-5ece-40a4-906a-70ea92583f27">
 
