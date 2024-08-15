@@ -11,10 +11,11 @@ A project exploring object-oriented design principles and SQL database integrati
 
 ### User Interface:
 #### Main Page:
-Main features include adding, removing, and updating products as well as displaying the inventory
+Main features include adding, removing, and updating products as well as displaying the inventory.
 
 
 <img width="233" alt="Inventory Management System Pic" src="https://github.com/user-attachments/assets/4f47ab65-3c94-4f2d-9537-ccfdc4bb4ff2">
+
 
 
 
